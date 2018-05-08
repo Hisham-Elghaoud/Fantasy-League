@@ -25,7 +25,7 @@ session_destroy();
 <meta charset="utf-8">
 <title>فانتازي دوري العياشي | تسجيل الخروج</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Refresh" content="1;url='../index.php' "/>
+<meta http-equiv="Refresh" content="1;url='login.php' "/>
 
 
 </head>

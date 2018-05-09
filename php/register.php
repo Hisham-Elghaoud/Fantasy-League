@@ -32,11 +32,13 @@ require("config.php");
 <body ng-app="">
 	<div class="ui middle aligned center aligned grid">
       <div class="column">
+      	
         <h2 class="ui teal image header">
+          <img class="ui middle aligned tiny image" src="../img/dc_logo.png" />
           <div class="content">
             التسجيل
           </div>
-          <img class="image" src="../img/logo.png" />
+          <img class="ui middle aligned tiny image" src="../img/logo.png" />
         </h2>
         <form class="ui large form" method="post" action="#" name="register_form" novalidate>
           <div class="ui stacked segment">

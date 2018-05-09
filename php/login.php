@@ -33,10 +33,11 @@ require("config.php");
 	<div class="ui middle aligned center aligned grid">
       <div class="column">
         <h2 class="ui teal image header">
+          <img class="ui middle aligned tiny image" src="../img/dc_logo.png" />
           <div class="content">
             تسجيل الدخول
           </div>
-          <img class="image" src="../img/logo.png" />
+          <img class="ui middle aligned tiny image" src="../img/logo.png" />
         </h2>
         <form action="#" class="ui large form" name="login_form" method="post" novalidate>
           <div class="ui stacked segment">

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 08, 2018 at 07:07 PM
+-- Generation Time: May 10, 2018 at 03:53 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -26,7 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `combination` (
-  `ID_Combination` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `User_Name` varchar(200) NOT NULL,
   `P1` varchar(200) NOT NULL,
   `P2` varchar(200) NOT NULL,
@@ -37,15 +37,15 @@ CREATE TABLE IF NOT EXISTS `combination` (
   `P7` varchar(200) NOT NULL,
   `P8` varchar(200) NOT NULL,
   `P9` varchar(200) NOT NULL,
-  PRIMARY KEY (`ID_Combination`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `combination`
 --
 
-INSERT INTO `combination` (`ID_Combination`, `User_Name`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`) VALUES
-(1, 'Ayoub_lwela', 'ali', 'ahmed', 'oumer', 'aya', 'Arroy', 'Yassen', 'Abu Bakr', 'jamal', 'nour');
+INSERT INTO `combination` (`id`, `User_Name`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`) VALUES
+(1, 'ayoub_user', 'Muhimen Alssdiq', 'Ayoub Lwela', 'Bader Eltobal', 'Omar Almogrbe', 'Hisham Elghaoud', 'Mooad Zbeda', 'Steve Jobes', 'Stevie Feliciano', 'Jenny Hess');
 
 -- --------------------------------------------------------
 
@@ -54,23 +54,29 @@ INSERT INTO `combination` (`ID_Combination`, `User_Name`, `P1`, `P2`, `P3`, `P4`
 --
 
 CREATE TABLE IF NOT EXISTS `players` (
-  `ID_Players` int(11) NOT NULL AUTO_INCREMENT,
-  `Player_First_Name` varchar(250) NOT NULL,
-  `Player_Last_Name` varchar(200) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Player_Name` varchar(250) NOT NULL,
   `Game_Week_Points` int(11) NOT NULL,
   `Total_points` int(100) NOT NULL,
   `Team` varchar(200) NOT NULL,
   `Salary` double NOT NULL,
-  `extra` varchar(200) NOT NULL,
-  PRIMARY KEY (`ID_Players`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `players`
 --
 
-INSERT INTO `players` (`ID_Players`, `Player_First_Name`, `Player_Last_Name`, `Game_Week_Points`, `Total_points`, `Team`, `Salary`, `extra`) VALUES
-(1, 'ayoub', 'lwela', 100, 526, 'al athad', 2000000, '');
+INSERT INTO `players` (`id`, `Player_Name`, `Game_Week_Points`, `Total_points`, `Team`, `Salary`) VALUES
+(1, 'Ayoub Lwela', 2, 10, 'al athad', 6),
+(2, 'Muhimen Alssdiq', 4, 15, 'al athad', 6.4),
+(3, 'Bader Eltobal', 2, 8, 'al madena', 7.2),
+(4, 'Omar Almogrbe', 6, 15, 'al madena', 7.5),
+(5, 'Hisham Elghaoud', 4, 12, 'al shat', 7),
+(6, 'Mooad Zbeda', 6, 12, 'al ahli', 7),
+(7, 'Steve Jobes', 5, 5, 'al ahli', 5.4),
+(8, 'Stevie Feliciano', 4, 4, 'al shat', 5.4),
+(9, 'Jenny Hess', 1, 1, 'al madena', 4);
 
 -- --------------------------------------------------------
 
@@ -79,22 +85,21 @@ INSERT INTO `players` (`ID_Players`, `Player_First_Name`, `Player_Last_Name`, `G
 --
 
 CREATE TABLE IF NOT EXISTS `ranks` (
-  `ID_Ranks` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `User_Name` varchar(250) NOT NULL,
   `Game_Week_Ranks` int(11) NOT NULL,
   `Total_Ranks` int(11) NOT NULL,
   `Point_Game_Week` int(11) NOT NULL,
   `Total_Points` int(11) NOT NULL,
-  `Extra` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID_Ranks`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `ranks`
 --
 
-INSERT INTO `ranks` (`ID_Ranks`, `User_Name`, `Game_Week_Ranks`, `Total_Ranks`, `Point_Game_Week`, `Total_Points`, `Extra`) VALUES
-(1, 'ayoub_ranks', 160, 5305, 562, 256, 'non');
+INSERT INTO `ranks` (`id`, `User_Name`, `Game_Week_Ranks`, `Total_Ranks`, `Point_Game_Week`, `Total_Points`) VALUES
+(1, 'ayoub_user', 160, 5305, 24, 40);
 
 -- --------------------------------------------------------
 
@@ -134,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `First_Name` varchar(100) NOT NULL,
   `Last_Name` varchar(100) NOT NULL,
   `Transfer` int(11) NOT NULL,
+  `img_src` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -141,6 +147,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`) VALUES
-(1, 'ayoub_user', 'ayoub_fhlom@yahoo.com', '123456789', '0927173403', 'Admin', '2018-05-16', '10:30:00', 'dfds', 'moaad', 'adsaf', 0),
-(3, 'Ø§Ù„Ù‡Ø´', 'hisham@gmail.com', '123456789', '0944687203', 'User', '2018-05-07', '23:04:09', 'al athad', 'Ù‡Ø´Ø§Ù…', 'Ø§Ù„Ù‚Ø¹ÙˆØ¯', 0);
+INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`, `img_src`) VALUES
+(1, 'ayoub_user', 'ayoub_fhlom@yahoo.com', '123456789', '0927173403', 'User', '2018-05-16', '10:30:00', 'dfds', 'moaad', 'adsaf', 0, '../img/pic.png'),
+(3, 'Hisham', 'hisham@gmail.com', '123456789', '0944687203', 'User', '2018-05-07', '23:04:09', 'al athad', 'Ù‡Ø´Ø§Ù…', 'Ø§Ù„Ù‚Ø¹ÙˆØ¯', 0, '../img/pic.png');

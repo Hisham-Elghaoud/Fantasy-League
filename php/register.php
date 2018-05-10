@@ -57,7 +57,8 @@ require("config.php");
 	                    $prevlage = "User";
 	                    $Register_Date = date("y-m-d");
 	                    $Register_Time = date("H:i:s");
-	                    $sql3 = "INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`) VALUES (NULL, '$username', '$email', '$password', '$phone', '$prevlage', '$Register_Date', '$Register_Time', '$fav_team', '$f_name', '$l_name', '$transfer')";
+	                    $img_src = "../img/pic.png";
+	                    $sql3 = "INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`, `img_src`) VALUES (NULL, '$username', '$email', '$password', '$phone', '$prevlage', '$Register_Date', '$Register_Time', '$fav_team', '$f_name', '$l_name', '$transfer' , '$img_src')";
 	                    mysql_query($sql3);
 	                    echo
 	                    "

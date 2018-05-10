@@ -1,15 +1,14 @@
 <?php
 require("config.php");
-if(!empty($_SESSION['myuse'])){
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | البيانات الشخصية</title>
+    <title>فانتازي دوري العياشي | اللاعبين</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -18,101 +17,24 @@ if(!empty($_SESSION['myuse'])){
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/semantic.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <!--Fixed Nav Menu-->
-      <?php require "fixed_nav.php"; ?>
+      <?php require "admin_fixed_nav.php"; ?>
     <!--Sidebar Menu-->
-      <?php require "sidebar.php"; ?>
+      <?php require "admin_sidebar.php"; ?>
     <!--Page Contents-->
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment" style="background-image: url('../img/bg.png'); background-repeat: no-repeat; background-size: cover;">
         <!--Main Nav Menu-->
-        <?php require "main_nav.php"; ?>
-        <div class="ui text container">
-          <h1 class="ui inverted header">
-          </h1>
-        </div>
+        <?php require "admin_main_nav.php"; ?>
       </div>
-      
       <div class="ui vertical stripe segment">
-      
-      	    <?php
-			$id= $_SESSION['id'];
-			$sql= "SELECT * FROM user where id='$id' ";
-			$query= mysql_query($sql);
-			$row= mysql_fetch_assoc($query);
-			?>
-            
-        <div class="ui middle aligned stackable grid container">
-          <div class="row">
-          <div class="six wide right floated column">
-              <img class="ui small circular image" src=" <?php echo $row["img_src"] ; ?> " />
-              <form action="upload_manager.php" method="post" enctype="multipart/form-data">          
-   <input type="file" name="upFile" ><br>
-   <input type="submit" name="submit" value="تحميل">
-</form> 
-            </div>
-            
-            
-            
-            <div class="eight wide column">
-            
-           
-            
-            
-                       
-                <table class="ui selectable inverted table" style="cursor:pointer">
-                  <tbody >
-                  
-                    <tr align="center">
-                      <td align="center"><?php echo $row["First_Name"]." ".$row["Last_Name"] ; ?></td>
- 			          <td align="center">  الأسم  </td>
-                    </tr>
-                    
-                    <tr align="center">
-                      <td ><?php echo $row["Phone_Number"] ; ?></td>
-                      <td align="center">  رقم الهاتف  </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["Email"] ; ?></td>
-                       <td align="center">   البريد الإلكتروني  </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["User_Name"] ; ?></td>
-                      <td align="center">  أسم المستخدم  </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["Register_Date"] ; ?></td>
-                      <td align="center">  تاريخ التسجيل   </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["Favorite_Team"] ; ?></td>
-                      <td align="center">  الفريق المفضل   </td>
-                    </tr>
-                     
-                 </tbody>
-                </table>            
-                            
-                            
-            
-            </div>
-            
-          </div>
-          <p></p>
-          <div class="row">
-            <div class="center aligned column">
-              <a class="ui inverted huge blue submit button" style="transition: 1.5s;"
-              href="edit_pass.php?id=<?php echo $id ?>">  تعديل كلمة المرور  </a>
-            </div>
-          </div>
+        <div class="ui container" >
+        
         </div>
       </div>
-      <!--footer Contents-->
+  <!--footer Contents-->
       <?php require "footer.php"; ?>
     </div>
     <style type="text/css">
@@ -227,10 +149,6 @@ if(!empty($_SESSION['myuse'])){
         })
       ;
     </script>
-  </body>
+
+</body>
 </html>
-<?php
-     }
-   else
-     print "<meta http-equiv='refresh' content='0;url=login.php'>";
-  ?>

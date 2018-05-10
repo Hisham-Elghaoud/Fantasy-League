@@ -3,13 +3,13 @@ require("config.php");
 if(!empty($_SESSION['myuse'])){
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | البيانات الشخصية</title>
+    <title>فانتازي دوري العياشي | القوانين</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -18,9 +18,33 @@ if(!empty($_SESSION['myuse'])){
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/semantic.min.js"></script>
+    <script>
+	$(document).ready(function(){
+      $('select.dropdown').dropdown();
+	  	$('.ui.accordion')
+  		.accordion()
+ 		;
+	});
+	
+
+</script>
+<style >
+.transition.hidden{
+color:#2C8A31;	
+}
+</style>
+
+<style>
+.body{font-family:"ARezvan";}
+</style>
+
   </head>
-  <body>
-    <!--Fixed Nav Menu-->
+<meta charset="utf-8">
+<title>Untitled Document</title>
+
+
+<body>
+	 <!--Fixed Nav Menu-->
       <?php require "fixed_nav.php"; ?>
     <!--Sidebar Menu-->
       <?php require "sidebar.php"; ?>
@@ -29,90 +53,80 @@ if(!empty($_SESSION['myuse'])){
       <div class="ui inverted vertical masthead center aligned segment" style="background-image: url('../img/bg.png'); background-repeat: no-repeat; background-size: cover;">
         <!--Main Nav Menu-->
         <?php require "main_nav.php"; ?>
-        <div class="ui text container">
-          <h1 class="ui inverted header">
-          </h1>
-        </div>
       </div>
-      
       <div class="ui vertical stripe segment">
-      
-      	    <?php
-			$id= $_SESSION['id'];
-			$sql= "SELECT * FROM user where id='$id' ";
-			$query= mysql_query($sql);
-			$row= mysql_fetch_assoc($query);
-			?>
-            
-        <div class="ui middle aligned stackable grid container">
-          <div class="row">
-          <div class="six wide right floated column">
-              <img class="ui small circular image" src=" <?php echo $row["img_src"] ; ?> " />
-              <form action="upload_manager.php" method="post" enctype="multipart/form-data">          
-   <input type="file" name="upFile" ><br>
-   <input type="submit" name="submit" value="تحميل">
-</form> 
+	  	<div class="ui container" >
+        
+            <div class="ui styled fluid accordion" align="center" style="background-color:#AEE495" >
+             <div class="title">
+                <i class="dropdown icon"></i>
+                الاعبين من كل فريق ؟
+              </div>
+              <div class="content">
+                <p class="transition hidden" style="color:#154418;">بإمكانك اختيار ثلاثة لاعبين بحد أقصى من كل الفرق في الدوري</p>
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                كيف تختار الاعبين ؟ 
+              </div>
+              <div class="content">
+                <p class="transition hidden" style="color:#154418;"> اختر تشكيلة تتظمن تسعة  لاعبين <br>  اثنان منهم حراس مرمى و سبعة لاعبين   </p>
+              </div>
+             
+             <div class="title">
+                <i class="dropdown icon"></i>
+                إختيار الكابتن والكابتن الإحتياطي ؟ 
+              </div>
+              <div class="content">
+                <p class="transition hidden" style="color:#154418;"> إختر كابتن الفريق و الكابتن الاحتياطي من تشكيلتك الأساسية <br> نقاط الكابتن يتم مضاعفتها في كل مبارة ,في حالة عدم لعب الكابتن لأي دقيقة في المبارة يتم مضاعفة نقاط الكابتن اللإحتياطي  <br> في حالة عدم مشاركة كلاهما لأي دقيقة لا يتم مضاعفة نقاط أي لاعب   </p>
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                النقاط ؟ 
+              </div>
+              <div class="content">
+                <p class="transition hidden" style="color:#154418;"> سيتم منح لاعبيك النقاط بناء علا ادائهم في مباريات الدوري
+                <br>
+                اللعب لمباراة كاملة تضيف نقطة واحدة
+                <br>
+                احراز هدف يضيف ستة نقاط
+                <br>
+                احراز حارس المرمى هدف يضيف ثمانية نقاط
+                <br>
+                صناعة الهدف يضيف اربعة نقاط
+                <br>
+                شباك نضيفه للحارس تضيف خمسة نقاط
+                <br>
+                ضربة جزاء يتم صدها تضيف خمسة نقاط
+                <br>
+                ضربة جزاء يتم اضاعتها تخصم ثلاث نقاط
+                <br>
+                كل هدف يتلقاه الحارس يخصم نقطة واحدة
+                <br>
+                كل هدف عكسي يخصم ثلاث نقاط
+                <br>
+                كرت اصفر يخصم نقطتين
+                <br>
+                كرت احمر يخصم ثلاث نقاط
+                
+                 </p>
+              </div>
+              <div class="title">
+                <i class="dropdown icon"></i>
+                الميزانية ؟
+              </div>
+              <div class="content">
+                <p class="transition hidden" style="color:#154418;"> 
+                إجمالي ثمن التشكيلة يجب ألا يتجاوز 100 ألف
+                </p>
+              </div>
             </div>
-            
-            
-            
-            <div class="eight wide column">
-            
-           
-            
-            
-                       
-                <table class="ui selectable inverted table" style="cursor:pointer">
-                  <tbody >
-                  
-                    <tr align="center">
-                      <td align="center"><?php echo $row["First_Name"]." ".$row["Last_Name"] ; ?></td>
- 			          <td align="center">  الأسم  </td>
-                    </tr>
-                    
-                    <tr align="center">
-                      <td ><?php echo $row["Phone_Number"] ; ?></td>
-                      <td align="center">  رقم الهاتف  </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["Email"] ; ?></td>
-                       <td align="center">   البريد الإلكتروني  </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["User_Name"] ; ?></td>
-                      <td align="center">  أسم المستخدم  </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["Register_Date"] ; ?></td>
-                      <td align="center">  تاريخ التسجيل   </td>
-                    </tr>
-                    
-                     <tr align="center">
-                      <td align="center"><?php echo $row["Favorite_Team"] ; ?></td>
-                      <td align="center">  الفريق المفضل   </td>
-                    </tr>
-                     
-                 </tbody>
-                </table>            
-                            
-                            
-            
-            </div>
-            
-          </div>
-          <p></p>
-          <div class="row">
-            <div class="center aligned column">
-              <a class="ui inverted huge blue submit button" style="transition: 1.5s;"
-              href="edit_pass.php?id=<?php echo $id ?>">  تعديل كلمة المرور  </a>
-            </div>
-          </div>
         </div>
       </div>
-      <!--footer Contents-->
+
+
+
+  <!--footer Contents-->
       <?php require "footer.php"; ?>
     </div>
     <style type="text/css">
@@ -227,7 +241,8 @@ if(!empty($_SESSION['myuse'])){
         })
       ;
     </script>
-  </body>
+
+</body>
 </html>
 <?php
      }

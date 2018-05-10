@@ -10,7 +10,7 @@ if(!empty($_SESSION['myuse'])){
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | التشكيلة</title>
+    <title>فانتازي دوري العياشي | إختيار اللاعبين</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -42,13 +42,6 @@ if(!empty($_SESSION['myuse'])){
       </div>
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
-          <?php 
-            $sql3 = "SELECT * FROM combination where User_Name = '$username' ";
-            $query3 = mysql_query($sql3);
-            $numrows=mysql_num_rows($query3);
-           if   ($numrows == 1)
-            {
-          ?>
           <div class="row">
             <div class="six wide left floated column">
               <div class="row">
@@ -141,15 +134,7 @@ if(!empty($_SESSION['myuse'])){
               $query = mysql_query($sql);
               $row = mysql_fetch_assoc($query);
             ?>
-            <form class="ui form" action="#" method="post" name="formation_form" ng-init="player1 = '<?php echo $row['P1'] ; ?>';
-            player2 = '<?php echo $row['P2'] ; ?>';
-            player3 = '<?php echo $row['P3'] ; ?>';
-            player4 = '<?php echo $row['P4'] ; ?>';
-            player5 = '<?php echo $row['P5'] ; ?>';
-            player6 = '<?php echo $row['P6'] ; ?>';
-            player7 = '<?php echo $row['P7'] ; ?>';
-            player8 = '<?php echo $row['P8'] ; ?>';
-            player9 = '<?php echo $row['P9'] ; ?>' ">
+            <form class="ui form" action="#" method="post" name="formation_form">
               <div class="eight wide column">
                 
             <?php 
@@ -172,9 +157,9 @@ if(!empty($_SESSION['myuse'])){
                 }
                 else
                 {
-                  $sql2 = "UPDATE combination set P1 = '$p1' , P2 = '$p2', P3 = '$p3', P4 = '$p4', P5 = '$p5', P6 = '$p6', P7 = '$p7', P8 = '$p8', P9 = '$p9' where User_Name = '$username' ";
+                  $sql2 = "INSERT INTO `combination` (`id`, `User_Name`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`) VALUES (NULL, '$username', '$p1', '$p2', '$p3', '$p4', '$p5', '$p6', '$p7', '$p8', '$p9');";
                   mysql_query($sql2);
-                  print "<meta http-equiv='refresh' content='0;url=my_team.php'>";
+                  print "<meta http-equiv='refresh' content='0;url=points.php'>";
                 }
               } 
             ?>
@@ -186,80 +171,68 @@ if(!empty($_SESSION['myuse'])){
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player1" ng-model="player1" >
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql4 = "SELECT * FROM players";
+                      $query4 = mysql_query($sql4);
+                      while ($row4 = mysql_fetch_assoc($query4)) {
+                     ?>
+                    <option value="<?php echo $row4['Player_Name'] ; ?>"><?php echo $row4['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player2" ng-model="player2">
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql5 = "SELECT * FROM players";
+                      $query5 = mysql_query($sql5);
+                      while ($row5 = mysql_fetch_assoc($query5)) {
+                     ?>
+                    <option value="<?php echo $row5['Player_Name'] ; ?>"><?php echo $row5['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player3" ng-model="player3">
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql6 = "SELECT * FROM players";
+                      $query6 = mysql_query($sql6);
+                      while ($row6 = mysql_fetch_assoc($query6)) {
+                     ?>
+                    <option value="<?php echo $row6['Player_Name'] ; ?>"><?php echo $row6['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player4" ng-model="player4">
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql7 = "SELECT * FROM players";
+                      $query7 = mysql_query($sql7);
+                      while ($row7 = mysql_fetch_assoc($query7)) {
+                     ?>
+                    <option value="<?php echo $row7['Player_Name'] ; ?>"><?php echo $row7['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player5" ng-model="player5">
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql8 = "SELECT * FROM players";
+                      $query8 = mysql_query($sql8);
+                      while ($row8 = mysql_fetch_assoc($query8)) {
+                     ?>
+                    <option value="<?php echo $row8['Player_Name'] ; ?>"><?php echo $row8['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player6" ng-model="player6">
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql9 = "SELECT * FROM players";
+                      $query9 = mysql_query($sql9);
+                      while ($row9 = mysql_fetch_assoc($query9)) {
+                     ?>
+                    <option value="<?php echo $row9['Player_Name'] ; ?>"><?php echo $row9['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="ui horizontal divider">
@@ -267,41 +240,35 @@ if(!empty($_SESSION['myuse'])){
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player7" ng-model="player7">
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql10 = "SELECT * FROM players";
+                      $query10 = mysql_query($sql10);
+                      while ($row10 = mysql_fetch_assoc($query10)) {
+                     ?>
+                    <option value="<?php echo $row10['Player_Name'] ; ?>"><?php echo $row10['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player8" ng-model="player8">
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $sql11 = "SELECT * FROM players";
+                      $query11 = mysql_query($sql11);
+                      while ($row11 = mysql_fetch_assoc($query11)) {
+                     ?>
+                    <option value="<?php echo $row11['Player_Name'] ; ?>"><?php echo $row11['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player9" ng-model="player9">
-                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
-                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
-                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
-                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
-                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
-                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
-                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
-                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
-                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
+                    <?php 
+                      $sql12 = "SELECT * FROM players";
+                      $query12 = mysql_query($sql12);
+                      while ($row12 = mysql_fetch_assoc($query12)) {
+                     ?>
+                    <option value="<?php echo $row12['Player_Name'] ; ?>"><?php echo $row12['Player_Name'] ; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
               </div>
@@ -312,16 +279,6 @@ if(!empty($_SESSION['myuse'])){
                 </div>
               </div>
             </form>
-            <?php 
-            }
-            else
-            {
-              echo "
-              <div class='ui header'>لم تقم بإختيار اللاعبين بعد</div>
-              <a href='select_players.php' class='ui inverted huge blue submit button' style='transition: 1.5s;'>إختار اللاعبين</a>
-              ";
-            } 
-            ?>
       </div>
    </div>
       <!--footer Contents-->

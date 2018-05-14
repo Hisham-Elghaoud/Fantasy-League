@@ -1,5 +1,7 @@
 <?php
 require("config.php");
+if(!empty($_SESSION['admin'])){
+  $Register_Date = date("y-m-d");
 ?>
 
 <!doctype html>
@@ -30,12 +32,63 @@ require("config.php");
         <?php require "admin_main_nav.php"; ?>
       </div>
       <div class="ui vertical stripe segment">
-        <div class="ui container" >
-        
+        <div class="ui middle aligned stackable grid container">
+          <div class="row">
+            <div class="eight wide centered column">
+              <a href="all_ranks.php" class="ui inverted fluid blue button" style="transition: 1.5s;">الترتيت الإجمالي</a>
+              <hr>
+              <table class="ui selectable inverted table">
+                <thead>
+                  <tr>
+                    <th>الترتيب</th>
+                    <th>الإسم</th>
+                    <th>نقاط هذه الجولة</th>
+                    <th>النقاط الكلية</th>
+                    <th>تم التحديث</th>
+                    <th class="right aligned">الإجراء</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                    $sql = "SELECT * FROM ranks order by Point_Game_Week desc ";
+                    $result = mysql_query($sql);
+                    $i = 1;
+                    while ($row = mysql_fetch_assoc($result)) {
+                   ?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $row["User_Name"]; ?></td>
+                    <td><?php echo $row["Point_Game_Week"]; ?></td>
+                    <td><?php echo $row["Total_Points"]; ?></td>
+                    <td>
+                      <?php 
+                        if ("20".$Register_Date == $row["Register_Date"])
+                        {
+                          echo "<i class='large green checkmark icon'></i>";
+                        }
+                        else
+                        {
+                          echo "<i class='large green attention icon'></i>";
+                        }
+                       ?>
+                    </td>
+                    <td class="right aligned">
+                      <a href="update_points.php?gwr=<?php echo $i ; ?>&username=<?php echo $row["User_Name"] ; ?>&gwp=<?php echo $row["Point_Game_Week"] ; ?>&tp=<?php echo $row["Total_Points"]; ?>&rd=<?php echo $Register_Date; ?>" class="ui inverted small blue button" style="transition: 1.5s;">تحديث</a>
+                      <a href="delete_users.php?username=<?php echo $row["User_Name"] ; ?>" class="ui inverted small red button" style="transition: 1.5s;">حذف</a>
+                    </td>
+                  </tr>
+                  <?php 
+                    $i++;
+                    } 
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
   <!--footer Contents-->
-      <?php require "footer.php"; ?>
+      <?php require "admin_footer.php"; ?>
     </div>
     <style type="text/css">
      .color{
@@ -152,3 +205,8 @@ require("config.php");
 
 </body>
 </html>
+<?php
+     }
+   else
+     print "<meta http-equiv='refresh' content='0;url=login.php'>";
+?>

@@ -9,7 +9,7 @@ if(!empty($_SESSION['admin'])){
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | اللاعبين</title>
+    <title>فانتازي دوري العياشي | الترتيب الكلي للجولة</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -33,8 +33,52 @@ if(!empty($_SESSION['admin'])){
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-            <div class="sixteen wide column">
-              
+            <div class="eight wide centered column">
+              <a href="users.php" class="ui inverted fluid blue button" style="transition: 1.5s;">ترتيب الجولة</a>
+              <hr>
+              <table class="ui selectable inverted table">
+                <thead>
+                  <tr>
+                    <th>الترتيب</th>
+                    <th>الإسم</th>
+                    <th>النقاط الكلية</th>
+                    <th>تم التحديث</th>
+                    <th class="right aligned">الإجراء</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                    $sql = "SELECT * FROM ranks order by Total_Points desc ";
+                    $result = mysql_query($sql);
+                    $i = 1;
+                    while ($row = mysql_fetch_assoc($result)) {
+                   ?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $row["User_Name"]; ?></td>
+                    <td><?php echo $row["Total_Points"]; ?></td>
+                    <td>
+                      <?php 
+                        if ($i == $row["Total_Ranks"])
+                        {
+                          echo "<i class='large green checkmark icon'></i>";
+                        }
+                        else
+                        {
+                          echo "<i class='large green attention icon'></i>";
+                        }
+                       ?>
+                    </td>
+                    <td class="right aligned">
+                      <a href="update_tottal_rank.php?ntr=<?php echo $i ; ?>&username=<?php echo $row["User_Name"] ; ?>" class="ui inverted small blue button" style="transition: 1.5s;">تحديث</a>
+                    </td>
+                  </tr>
+                  <?php 
+                    $i++;
+                    } 
+                  ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

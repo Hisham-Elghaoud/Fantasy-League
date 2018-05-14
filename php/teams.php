@@ -1,5 +1,6 @@
 <?php
 require("config.php");
+if(!empty($_SESSION['admin'])){
 ?>
 
 <!doctype html>
@@ -30,12 +31,16 @@ require("config.php");
         <?php require "admin_main_nav.php"; ?>
       </div>
       <div class="ui vertical stripe segment">
-        <div class="ui container" >
-        
+        <div class="ui middle aligned stackable grid container">
+          <div class="row">
+            <div class="sixteen wide column">
+              
+            </div>
+          </div>
         </div>
       </div>
   <!--footer Contents-->
-      <?php require "footer.php"; ?>
+      <?php require "admin_footer.php"; ?>
     </div>
     <style type="text/css">
      .color{
@@ -152,3 +157,8 @@ require("config.php");
 
 </body>
 </html>
+<?php
+     }
+   else
+     print "<meta http-equiv='refresh' content='0;url=login.php'>";
+?>

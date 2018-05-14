@@ -34,75 +34,67 @@ if(!empty($_SESSION['myuse'])){
           </h1>
         </div>
       </div>
-      
       <div class="ui vertical stripe segment">
-      
-      	    <?php
-			$id= $_SESSION['id'];
-			$sql= "SELECT * FROM user where id='$id' ";
-			$query= mysql_query($sql);
-			$row= mysql_fetch_assoc($query);
-			?>
-            
+      	<?php
+    			$id= $_SESSION['id'];
+    			$sql= "SELECT * FROM user where id='$id' ";
+    			$query= mysql_query($sql);
+    			$row= mysql_fetch_assoc($query);
+  			?>  
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-          <div class="six wide right floated column">
-              <img class="ui small circular image" src=" <?php echo $row["img_src"] ; ?> " />
-              <form action="upload_manager.php" method="post" enctype="multipart/form-data">          
-   <input type="file" name="upFile" ><br>
-   <input type="submit" name="submit" value="تحميل">
-</form> 
+            <div class="six wide right floated column">
+                <img class="ui small circular image" src=" <?php echo $row["img_src"] ; ?> " />
+                <form action="upload_manager.php" method="post" enctype="multipart/form-data">          
+                   <input type="file" name="upFile" ><br>
+                   <input type="submit" name="submit" value="تحميل">
+                </form> 
             </div>
-            
-            
-            
             <div class="eight wide column">
-            
-           
-            
-            
-                       
-                <table class="ui selectable inverted table" style="cursor:pointer">
-                  <tbody >
-                  
-                    <tr align="center">
+              <table class="ui selectable inverted table" style="cursor:pointer">
+                <tbody >
+                   <tr align="center">
                       <td align="center"><?php echo $row["First_Name"]." ".$row["Last_Name"] ; ?></td>
- 			          <td align="center">  الأسم  </td>
-                    </tr>
-                    
-                    <tr align="center">
+     			            <td align="center">  الأسم  </td>
+                   </tr>
+                   <tr align="center">
                       <td ><?php echo $row["Phone_Number"] ; ?></td>
                       <td align="center">  رقم الهاتف  </td>
-                    </tr>
-                    
-                     <tr align="center">
+                  </tr>
+                  <tr align="center">
                       <td align="center"><?php echo $row["Email"] ; ?></td>
-                       <td align="center">   البريد الإلكتروني  </td>
-                    </tr>
-                    
-                     <tr align="center">
+                      <td align="center">   البريد الإلكتروني  </td>
+                  </tr>
+                  <tr align="center">
                       <td align="center"><?php echo $row["User_Name"] ; ?></td>
                       <td align="center">  أسم المستخدم  </td>
-                    </tr>
-                    
-                     <tr align="center">
+                  </tr>
+                  <tr align="center">
                       <td align="center"><?php echo $row["Register_Date"] ; ?></td>
                       <td align="center">  تاريخ التسجيل   </td>
-                    </tr>
-                    
-                     <tr align="center">
+                  </tr>
+                  <tr align="center">
                       <td align="center"><?php echo $row["Favorite_Team"] ; ?></td>
                       <td align="center">  الفريق المفضل   </td>
-                    </tr>
-                     
-                 </tbody>
-                </table>            
-                            
-                            
-            
+                  </tr>
+                  <?php
+                    $username= $_SESSION['myuse'];
+                    $sql2= "SELECT * FROM ranks where User_Name='$username' ";
+                    $query2= mysql_query($sql2);
+                    $row2= mysql_fetch_assoc($query2);
+                  ?>
+                  <tr align="center">
+                      <td align="center"><?php echo $row2["Total_Points"] ; ?></td>
+                      <td align="center">  النقاط الإجمالية   </td>
+                  </tr>
+                  <tr align="center">
+                      <td align="center"><?php echo $row2["Total_Ranks"] ; ?></td>
+                      <td align="center">  الترتيب الكلي   </td>
+                  </tr>  
+                </tbody>
+              </table>            
             </div>
-            
-          </div>
+        </div>
           <p></p>
           <div class="row">
             <div class="center aligned column">

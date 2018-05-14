@@ -224,9 +224,14 @@ if(!empty($_SESSION['myuse'])){
               <table class="ui celled structured table" dir="rtl">
                 <thead>
                   <tr>
-                    <th rowspan="2" style="color:red; text-align: right;"><span style="font-size:40px;">نقاطك : <?php 
-                    echo $player1_Game_Week_Points + $player2_Game_Week_Points + $player3_Game_Week_Points + $player4_Game_Week_Points + $player5_Game_Week_Points + $player6_Game_Week_Points;
-                     ?></span></th>
+                    <th rowspan="2" style="color:red; text-align: right;"><span style="font-size:40px;">نقاطك : 
+                      <?php 
+                      $gwp= $player1_Game_Week_Points + $player2_Game_Week_Points + $player3_Game_Week_Points + $player4_Game_Week_Points + $player5_Game_Week_Points + $player6_Game_Week_Points;
+                      echo $gwp;
+                      $sql400 = "UPDATE ranks set Point_Game_Week = '$gwp' where User_Name = '$username' ";
+                      mysql_query($sql400);
+                     ?></span>
+                   </th>
                     <th rowspan="2" align="right" style="text-align: right;">أعلى نقاط : <?php 
                     $sql66 = "SELECT * FROM ranks";
                     $query66 = mysql_query($sql66);
@@ -260,7 +265,14 @@ if(!empty($_SESSION['myuse'])){
                 </thead>
                 <tbody>
                   <tr>
-                    <td colspan="3" style="text-align: center; font-size:40px;">ترتيب الجولة : <br><br> 250</td>
+                    <td colspan="3" style="text-align: center; font-size:40px;">ترتيب الجولة : <br><br> 
+                      <?php 
+                        $sql77 = "SELECT * FROM ranks where User_Name = '$username' ";
+                        $query77 = mysql_query($sql77);
+                        $row77 = mysql_fetch_assoc($query77);
+                        echo $row77["Game_Week_Ranks"];
+                      ?>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -268,7 +280,7 @@ if(!empty($_SESSION['myuse'])){
           </div>
           <div class="row">
             <div class="center aligned column">
-              <a class="ui inverted huge blue submit button" href="ranks.php" style="transition: 1.5s;">الترتيب الكلي</a>
+              <a class="ui inverted huge blue submit button" href="ranks.php" style="transition: 1.5s;">الترتيب الكلي للجولة</a>
             </div>
           </div>
             <?php 

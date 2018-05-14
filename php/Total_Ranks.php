@@ -1,6 +1,7 @@
 <?php
 require("config.php");
-if(!empty($_SESSION['admin'])){
+if(!empty($_SESSION['myuse'])){
+                  $username = $_SESSION['myuse'];
 ?>
 
 <!doctype html>
@@ -9,7 +10,7 @@ if(!empty($_SESSION['admin'])){
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | اللاعبين</title>
+    <title>فانتازي دوري العياشي | الترتيب الكلي</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -21,26 +22,55 @@ if(!empty($_SESSION['admin'])){
 </head>
 <body>
     <!--Fixed Nav Menu-->
-      <?php require "admin_fixed_nav.php"; ?>
+      <?php require "fixed_nav.php"; ?>
     <!--Sidebar Menu-->
-      <?php require "admin_sidebar.php"; ?>
+      <?php require "sidebar.php"; ?>
     <!--Page Contents-->
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment" style="background-image: url('../img/bg.png'); background-repeat: no-repeat; background-size: cover;">
         <!--Main Nav Menu-->
-        <?php require "admin_main_nav.php"; ?>
+        <?php require "main_nav.php"; ?>
       </div>
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-            <div class="sixteen wide column">
-              
+            <div class="eight wide centered column">
+              <a href="ranks.php" class="ui inverted fluid blue button" style="transition: 1.5s;">ترتيب الجولة</a>
+              <hr>
+              <table class="ui selectable inverted table">
+                <thead>
+                  <tr>
+                    <th>الترتيب</th>
+                    <th>الإسم</th>
+                    <th>نقاط هذه الجولة</th>
+                    <th>النقاط الكلية</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                    $sql = "SELECT * FROM ranks order by Point_Game_Week desc ";
+                    $result = mysql_query($sql);
+                    $i = 1;
+                    while ($row = mysql_fetch_assoc($result)) {
+                   ?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $row["User_Name"]; ?></td>
+                    <td><?php echo $row["Point_Game_Week"]; ?></td>
+                    <td><?php echo $row["Total_Points"]; ?></td>
+                  </tr>
+                  <?php 
+                    $i++;
+                    } 
+                  ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
   <!--footer Contents-->
-      <?php require "admin_footer.php"; ?>
+      <?php require "footer.php"; ?>
     </div>
     <style type="text/css">
      .color{
@@ -161,4 +191,4 @@ if(!empty($_SESSION['admin'])){
      }
    else
      print "<meta http-equiv='refresh' content='0;url=login.php'>";
-?>
+  ?>

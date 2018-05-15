@@ -1,6 +1,8 @@
 <?php
 require("config.php");
 if(!empty($_SESSION['admin'])){
+  $team1 = $_GET["team1"];
+  $team2 = $_GET["team2"];
 ?>
 
 <!doctype html>
@@ -9,7 +11,7 @@ if(!empty($_SESSION['admin'])){
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | الفرق</title>
+    <title>فانتازي دوري العياشي | المباريات</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -18,8 +20,16 @@ if(!empty($_SESSION['admin'])){
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/semantic.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          $('select.dropdown').dropdown();
+          $('.special.cards .image').dimmer({
+            on: 'hover'
+          });
+      });
+    </script>
 </head>
-<body>
+<body ng-app="">
     <!--Fixed Nav Menu-->
       <?php require "admin_fixed_nav.php"; ?>
     <!--Sidebar Menu-->
@@ -33,26 +43,62 @@ if(!empty($_SESSION['admin'])){
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-            <div class="sixteen wide column">      
-             <form class="ui form" dir="rtl" method="post" action="#">
-                <div class="field">
-                  <label>إضافة الفريق </label>
-                  <input type="text" name="teams_name" placeholder="الفريق">
+            <div class="six wide centered column">
+              <?php 
+                if (isset($_POST["submit"])) 
+                {
+                  $t1=mysql_real_escape_string($_POST["tm1"]);
+                  $t2=mysql_real_escape_string($_POST["tm2"]);
+                  $match_score = "".$t1." - ".$t2."";
+                  $sql3="UPDATE `matchs` set score = '$match_score' where team1 = '$team1' AND  team2 = '$team2'";
+                  mysql_query($sql3);
+                  print "<meta http-equiv='refresh' content='0;url=matchs.php'>";
+                }
+               ?>
+                      <?php 
+                        $sql = "SELECT * FROM matchs where team1 = '$team1' AND  team2 = '$team2' ";
+                        $result = mysql_query($sql);
+                        $row = mysql_fetch_assoc($result);
+                       ?>
+              <form class="ui form" name="set_match_score" action="#" method="post" novalidate>
+                <div class="fields">
+                  <div class="field">
+                    <div class="ui massive label">
+                      <?php echo $row["team2"]; ?>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui huge header" style="padding-top: 10px;">
+                      VS
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui massive label">
+                      <?php echo $row["team1"]; ?>
+                    </div>
+                  </div>
+                </div>
+                <div class="fields">
+                  <div class="field">
+                    <div class="ui massive label">
+                      <input required type="number" ng-model="tm2" name="tm2">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui huge header" style="padding-top: 10px;">
+                      -
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui massive label">
+                      <input required type="number" ng-model="tm1" name="tm1">
+                    </div>
+                  </div>
                 </div>
                 <div class="field">
-                  <input name="submit" class="ui inverted blue button" type="submit" value="إضافة">
-               </div>
+                    <input type="submit" name="submit" class="ui inverted fluid blue button" value="تأكيد" style="transition: 1.5s;">
+                  </div>
               </form>
-              <?php 
-			
-			          if (isset($_POST["submit"])) 
-	                  {
-      							 $teams_name = mysql_real_escape_string($_POST["teams_name"]);
-      							 $sql= "INSERT INTO `teams` (`id`, `team_name`) VALUES (NULL, '$teams_name')";
-      							 mysql_query($sql);
-      							 print "<meta http-equiv='refresh' content='0;url=teams.php'>";  
-                     }
-			         ?> 
             </div>
           </div>
         </div>

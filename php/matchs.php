@@ -64,7 +64,17 @@ if(!empty($_SESSION['admin'])){
                               </div>
                               <div class="item">
                                 <div class="content">
+                                  <?php 
+                                    if ($row4["score"] == " ") {
+                                   ?>
                                   <div class="header">VS</div>
+                                  <?php 
+                                    }
+                                    else
+                                    {
+                                   ?>
+                                   <div class="header"><?php echo $row4["score"]; ?></div>
+                                   <?php } ?>
                                 </div>
                               </div>
                               <div class="item">
@@ -96,8 +106,9 @@ if(!empty($_SESSION['admin'])){
                 {
                   $team1=mysql_real_escape_string($_POST["team1"]);
                   $team2=mysql_real_escape_string($_POST["team2"]);
+                  $scores = " ";
                   $match_date=mysql_real_escape_string($_POST["match_date"]);
-                  $sql3="INSERT INTO `matchs` (`id`, `team1`, `team2`, `match_date`) VALUES (NULL, '$team1', '$team2', '$match_date')";
+                  $sql3="INSERT INTO `matchs` (`id`, `team1`, `team2`, `match_date`, `score`) VALUES (NULL, '$team1', '$team2', '$match_date', '$scores')";
                   mysql_query($sql3);
                   print "<meta http-equiv='refresh' content='0;url=matchs.php'>";
                 }

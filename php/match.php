@@ -2,6 +2,8 @@
 require("config.php");
 if(!empty($_SESSION['admin'])){
   $dates = date("y-m-d");
+  $team1 = $_GET["team1"];
+  $team2 = $_GET["team2"];
 ?>
 
 <!doctype html>
@@ -39,6 +41,11 @@ if(!empty($_SESSION['admin'])){
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
+            <div class="six wide centered column">
+              <a href="set_match_score.php?team1=<?php echo $team1; ?>&team2=<?php echo $team2; ?>" class="ui inverted fluid blue button" style="transition: 1.5s;">إدخال نتيجة المبارة</a>
+            </div>
+          </div>
+          <div class="row">
             <div class="sixteen wide column">
               <form action="#" method="post" name="player_rating" class="ui form" novalidate>
                 <table class="ui selectable inverted table">
@@ -64,8 +71,6 @@ if(!empty($_SESSION['admin'])){
                       <td>
                         <select name="player_name" class="ui dropdown">
                           <?php
-                          $team1 = $_GET["team1"];
-                          $team2 = $_GET["team2"];
                           $sql77 = "SELECT * FROM players 
                           where 
                           Team = '$team1' AND update_date != '$dates' 

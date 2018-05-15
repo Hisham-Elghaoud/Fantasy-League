@@ -33,7 +33,28 @@ if(!empty($_SESSION['admin'])){
       </div>
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
-          <div class="row">
+          <div class="six wide right floated column">
+            <div class="row">
+              <div class="eight wide centered column">
+                <a href="open_my_team.php" class="ui inverted fluid green button" style="transition: 1.5s;">فتح تعديل التشكيلة</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="eight wide centered column">
+                <a href="close_my_team.php" class="ui inverted fluid red button" style="transition: 1.5s;">غلق تعديل التشكيلة</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="eight wide centered column">
+                <a href="open_transfer.php" class="ui inverted fluid green button" style="transition: 1.5s;">فتح الإنتقالات</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="eight wide centered column">
+                <a href="close_transfer.php" class="ui inverted fluid red button" style="transition: 1.5s;">غلق الإنتقالات</a>
+              </div>
+            </div>
+          </div>
             <div class="eight wide centered column">
               <a href="all_ranks.php" class="ui inverted fluid blue button" style="transition: 1.5s;">الترتيت الإجمالي</a>
               <hr>
@@ -84,7 +105,6 @@ if(!empty($_SESSION['admin'])){
                 </tbody>
               </table>
             </div>
-          </div>
         </div>
       </div>
   <!--footer Contents-->

@@ -1,8 +1,8 @@
 <?php
 require("config.php");
 if(!empty($_SESSION['myuse'])){
-              $username = $_SESSION['myuse'];
-              $maximum_salary = 650 ;
+  $username = $_SESSION['myuse'];
+  $maximum_salary = 650 ;
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ if(!empty($_SESSION['myuse'])){
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | إختيار اللاعبين</title>
+    <title>فانتازي دوري العياشي | الإنتقالات</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -35,14 +35,27 @@ if(!empty($_SESSION['myuse'])){
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment" style="background-image: url('../img/bg.png'); background-repeat: no-repeat; background-size: cover;">
         <!--Main Nav Menu-->
-        <?php require "main_nav.php"; ?>
+        <?php require "main_nav.php"; 
+              $sql4 = "SELECT * FROM user where User_Name = '$username' ";
+              $query4 = mysql_query($sql4);
+              $row4 = mysql_fetch_assoc($query4);
+              $transfer = $row4["Transfer"];
+              if ($transfer == 1) {
+        ?>
         <div class="ui text container">
           <h1 class="ui inverted header">
           </h1>
         </div>
       </div>
-      <div class="ui vertical stripe segment">
+     <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
+          <?php 
+            $sql3 = "SELECT * FROM combination where User_Name = '$username' ";
+            $query3 = mysql_query($sql3);
+            $numrows=mysql_num_rows($query3);
+           if   ($numrows == 1)
+            {
+          ?>
           <div class="row">
             <div class="sixteen wide centered column">
               <marquee direction="left" loop="1000" onmouseover="stop();"  onmouseout="start();">
@@ -186,20 +199,29 @@ if(!empty($_SESSION['myuse'])){
               $query = mysql_query($sql);
               $row = mysql_fetch_assoc($query);
             ?>
-            <form class="ui form" action="#" method="post" name="formation_form">
+            <form class="ui form" action="#" method="post" name="formation_form" ng-init="player1 = '<?php echo $row['P1'] ; ?>';
+            player2 = '<?php echo $row['P2'] ; ?>';
+            player3 = '<?php echo $row['P3'] ; ?>';
+            player4 = '<?php echo $row['P4'] ; ?>';
+            player5 = '<?php echo $row['P5'] ; ?>';
+            player6 = '<?php echo $row['P6'] ; ?>';
+            player7 = '<?php echo $row['P7'] ; ?>';
+            player8 = '<?php echo $row['P8'] ; ?>';
+            player9 = '<?php echo $row['P9'] ; ?>' ">
               <div class="eight wide column">
-                <?php 
-                  if (isset($_POST["submit"]))
-                  {
-                    $p1 = mysql_real_escape_string($_POST["player1"]) ;
-                    $p2 = mysql_real_escape_string($_POST["player2"]) ;
-                    $p3 = mysql_real_escape_string($_POST["player3"]) ;
-                    $p4 = mysql_real_escape_string($_POST["player4"]) ;
-                    $p5 = mysql_real_escape_string($_POST["player5"]) ;
-                    $p6 = mysql_real_escape_string($_POST["player6"]) ;
-                    $p7 = mysql_real_escape_string($_POST["player7"]) ;
-                    $p8 = mysql_real_escape_string($_POST["player8"]) ;
-                    $p9 = mysql_real_escape_string($_POST["player9"]) ;
+                
+            <?php 
+              if (isset($_POST["submit"]))
+              {
+                $p1 = mysql_real_escape_string($_POST["player1"]) ;
+                $p2 = mysql_real_escape_string($_POST["player2"]) ;
+                $p3 = mysql_real_escape_string($_POST["player3"]) ;
+                $p4 = mysql_real_escape_string($_POST["player4"]) ;
+                $p5 = mysql_real_escape_string($_POST["player5"]) ;
+                $p6 = mysql_real_escape_string($_POST["player6"]) ;
+                $p7 = mysql_real_escape_string($_POST["player7"]) ;
+                $p8 = mysql_real_escape_string($_POST["player8"]) ;
+                $p9 = mysql_real_escape_string($_POST["player9"]) ;
                     $sql13 = "SELECT * FROM players where Player_Name = '$p1' ";
                     $query13 = mysql_query($sql13);
                     $row13 = mysql_fetch_assoc($query13);
@@ -237,12 +259,12 @@ if(!empty($_SESSION['myuse'])){
                     $row21 = mysql_fetch_assoc($query21);
                     $ts9 = $row21["Salary"];
                     $total_salary = $ts1 + $ts2 + $ts3 + $ts4 + $ts5 + $ts6 + $ts7 + $ts8 + $ts9 ;
-                    if ($p1 == $p2 || $p1 == $p3 || $p1 == $p4 || $p1 == $p5 || $p1 == $p6 || $p1 == $p7 || $p1 == $p8 || $p1 == $p9 || $p2 == $p1 || $p2 == $p3 || $p2 == $p4 || $p2 == $p5 || $p2 == $p6 || $p2 == $p7 || $p2 == $p8 || $p2 == $p9 || $p3 == $p1 || $p3 == $p2 || $p3 == $p4 || $p3 == $p5 || $p3 == $p6 || $p3 == $p7 || $p3 == $p8 || $p3 == $p9 || $p4 == $p1 || $p4 == $p2 || $p4 == $p3 || $p4 == $p5 || $p4 == $p6 || $p4 == $p7 || $p4 == $p8 || $p4 == $p9 || $p5 == $p1 || $p5 == $p2 || $p5 == $p3 || $p5 == $p4 || $p5 == $p6 || $p5 == $p7 || $p5 == $p8 || $p5 == $p9 || $p6 == $p1 || $p6 == $p2 || $p6 == $p3 || $p6 == $p4 || $p6 == $p5 || $p6 == $p7 || $p6 == $p8 || $p6 == $p9 || $p7 == $p1 || $p7 == $p2 || $p7 == $p3 || $p7 == $p4 || $p7 == $p5 || $p7 == $p6 || $p7 == $p8 || $p7 == $p9 || $p8 == $p1 || $p8 == $p2 || $p8 == $p3 || $p8 == $p4 || $p8 == $p5 || $p8 == $p6 || $p8 == $p7 || $p8 == $p9 || $p9 == $p1 || $p9 == $p2 || $p9 == $p3 || $p9 == $p4 || $p9 == $p5 || $p9 == $p6 || $p9 == $p7 || $p9 == $p8 ) {
-                      echo "
-                      <div class='ui red message'>
-                        يوجد تكرار في اللاعببين
-                      </div>";
-                    }
+                if ($p1 == $p2 || $p1 == $p3 || $p1 == $p4 || $p1 == $p5 || $p1 == $p6 || $p1 == $p7 || $p1 == $p8 || $p1 == $p9 || $p2 == $p1 || $p2 == $p3 || $p2 == $p4 || $p2 == $p5 || $p2 == $p6 || $p2 == $p7 || $p2 == $p8 || $p2 == $p9 || $p3 == $p1 || $p3 == $p2 || $p3 == $p4 || $p3 == $p5 || $p3 == $p6 || $p3 == $p7 || $p3 == $p8 || $p3 == $p9 || $p4 == $p1 || $p4 == $p2 || $p4 == $p3 || $p4 == $p5 || $p4 == $p6 || $p4 == $p7 || $p4 == $p8 || $p4 == $p9 || $p5 == $p1 || $p5 == $p2 || $p5 == $p3 || $p5 == $p4 || $p5 == $p6 || $p5 == $p7 || $p5 == $p8 || $p5 == $p9 || $p6 == $p1 || $p6 == $p2 || $p6 == $p3 || $p6 == $p4 || $p6 == $p5 || $p6 == $p7 || $p6 == $p8 || $p6 == $p9 || $p7 == $p1 || $p7 == $p2 || $p7 == $p3 || $p7 == $p4 || $p7 == $p5 || $p7 == $p6 || $p7 == $p8 || $p7 == $p9 || $p8 == $p1 || $p8 == $p2 || $p8 == $p3 || $p8 == $p4 || $p8 == $p5 || $p8 == $p6 || $p8 == $p7 || $p8 == $p9 || $p9 == $p1 || $p9 == $p2 || $p9 == $p3 || $p9 == $p4 || $p9 == $p5 || $p9 == $p6 || $p9 == $p7 || $p9 == $p8) {
+                  echo "
+                  <div class='ui red message'>
+                    يوجد تكرار في اللاعببين
+                  </div>";
+                }
                     else
                       if ($total_salary > $maximum_salary) {
                         echo "
@@ -252,12 +274,12 @@ if(!empty($_SESSION['myuse'])){
                       }
                       else
                     {
-                      $sql2 = "INSERT INTO `combination` (`id`, `User_Name`, `P1`, `P2`, `P3`, `P4`, `P5`, `P6`, `P7`, `P8`, `P9`) VALUES (NULL, '$username', '$p1', '$p2', '$p3', '$p4', '$p5', '$p6', '$p7', '$p8', '$p9');";
-                      mysql_query($sql2);
-                      print "<meta http-equiv='refresh' content='0;url=points.php'>";
-                    }
-                  } 
-                ?>
+                  $sql2 = "UPDATE combination set P1 = '$p1' , P2 = '$p2', P3 = '$p3', P4 = '$p4', P5 = '$p5', P6 = '$p6', P7 = '$p7', P8 = '$p8', P9 = '$p9' where User_Name = '$username' ";
+                  mysql_query($sql2);
+                  print "<meta http-equiv='refresh' content='0;url=my_team.php'>";
+                }
+              } 
+            ?>
                 <div class="ui horizontal divider">
                   الرجاء التأكد من كافة المراكز لعدم التكرار قبل الحفظ
                 </div>
@@ -269,67 +291,79 @@ if(!empty($_SESSION['myuse'])){
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player1" ng-model="player1" >
+                    <option value="<?php echo $row['P1'] ; ?>"><?php echo $row['P1'] ; ?></option>
                     <?php 
-                      $sql4 = "SELECT * FROM players";
-                      $query4 = mysql_query($sql4);
-                      while ($row4 = mysql_fetch_assoc($query4)) {
-                     ?>
-                    <option value="<?php echo $row4['Player_Name'] ; ?>"><?php echo $row4['Player_Name'] ; ?></option>
+                      $play1 = $row['P1'] ;
+                      $sql5 = "SELECT * FROM players where Player_Name != '$play1' ";
+                      $query1 = mysql_query($sql5);
+                      while($row1 = mysql_fetch_assoc($query1)){
+                    ?>
+                    <option value="<?php echo $row1['Player_Name'] ; ?>"><?php echo $row1['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player2" ng-model="player2">
+                    <option value="<?php echo $row['P2'] ; ?>"><?php echo $row['P2'] ; ?></option>
                     <?php 
-                      $sql5 = "SELECT * FROM players";
-                      $query5 = mysql_query($sql5);
-                      while ($row5 = mysql_fetch_assoc($query5)) {
-                     ?>
-                    <option value="<?php echo $row5['Player_Name'] ; ?>"><?php echo $row5['Player_Name'] ; ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-                <div class="field">
-                  <select class="ui dropdown" name="player3" ng-model="player3">
-                    <?php 
-                      $sql6 = "SELECT * FROM players";
+                      $play2 = $row['P2'] ;
+                      $sql6 = "SELECT * FROM players where Player_Name != '$play2' ";
                       $query6 = mysql_query($sql6);
-                      while ($row6 = mysql_fetch_assoc($query6)) {
-                     ?>
+                      while($row6 = mysql_fetch_assoc($query6)){
+                    ?>
                     <option value="<?php echo $row6['Player_Name'] ; ?>"><?php echo $row6['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="field">
-                  <select class="ui dropdown" name="player4" ng-model="player4">
+                  <select class="ui dropdown" name="player3" ng-model="player3">
+                    <option value="<?php echo $row['P3'] ; ?>"><?php echo $row['P3'] ; ?></option>
                     <?php 
-                      $sql7 = "SELECT * FROM players";
+                      $play3 = $row['P3'] ;
+                      $sql7 = "SELECT * FROM players where Player_Name != '$play3' ";
                       $query7 = mysql_query($sql7);
-                      while ($row7 = mysql_fetch_assoc($query7)) {
-                     ?>
+                      while($row7 = mysql_fetch_assoc($query7)){
+                    ?>
                     <option value="<?php echo $row7['Player_Name'] ; ?>"><?php echo $row7['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="field">
-                  <select class="ui dropdown" name="player5" ng-model="player5">
+                  <select class="ui dropdown" name="player4" ng-model="player4">
+                    <option value="<?php echo $row['P4'] ; ?>"><?php echo $row['P4'] ; ?></option>
                     <?php 
-                      $sql8 = "SELECT * FROM players";
+                      $play4 = $row['P4'] ;
+                      $sql8 = "SELECT * FROM players where Player_Name != '$play4' ";
                       $query8 = mysql_query($sql8);
-                      while ($row8 = mysql_fetch_assoc($query8)) {
-                     ?>
+                      while($row8 = mysql_fetch_assoc($query8)){
+                    ?>
                     <option value="<?php echo $row8['Player_Name'] ; ?>"><?php echo $row8['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="field">
-                  <select class="ui dropdown" name="player6" ng-model="player6">
+                  <select class="ui dropdown" name="player5" ng-model="player5">
+                    <option value="<?php echo $row['P5'] ; ?>"><?php echo $row['P5'] ; ?></option>
                     <?php 
-                      $sql9 = "SELECT * FROM players";
+                      $play5 = $row['P5'] ;
+                      $sql9 = "SELECT * FROM players where Player_Name != '$play5' ";
                       $query9 = mysql_query($sql9);
-                      while ($row9 = mysql_fetch_assoc($query9)) {
-                     ?>
+                      while($row9 = mysql_fetch_assoc($query9)){
+                    ?>
                     <option value="<?php echo $row9['Player_Name'] ; ?>"><?php echo $row9['Player_Name'] ; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="field">
+                  <select class="ui dropdown" name="player6" ng-model="player6">
+                    <option value="<?php echo $row['P6'] ; ?>"><?php echo $row['P6'] ; ?></option>
+                    <?php 
+                      $play6 = $row['P6'] ;
+                      $sql10 = "SELECT * FROM players where Player_Name != '$play6' ";
+                      $query10 = mysql_query($sql10);
+                      while($row10 = mysql_fetch_assoc($query10)){
+                    ?>
+                    <option value="<?php echo $row10['Player_Name'] ; ?>"><?php echo $row10['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -338,34 +372,40 @@ if(!empty($_SESSION['myuse'])){
                 </div>
                 <div class="field">
                   <select class="ui dropdown" name="player7" ng-model="player7">
+                    <option value="<?php echo $row['P7'] ; ?>"><?php echo $row['P7'] ; ?></option>
                     <?php 
-                      $sql10 = "SELECT * FROM players";
-                      $query10 = mysql_query($sql10);
-                      while ($row10 = mysql_fetch_assoc($query10)) {
-                     ?>
-                    <option value="<?php echo $row10['Player_Name'] ; ?>"><?php echo $row10['Player_Name'] ; ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-                <div class="field">
-                  <select class="ui dropdown" name="player8" ng-model="player8">
-                    <?php 
-                      $sql11 = "SELECT * FROM players";
+                      $play7 = $row['P7'] ;
+                      $sql11 = "SELECT * FROM players where Player_Name != '$play7' ";
                       $query11 = mysql_query($sql11);
-                      while ($row11 = mysql_fetch_assoc($query11)) {
-                     ?>
+                      while($row11 = mysql_fetch_assoc($query11)){
+                    ?>
                     <option value="<?php echo $row11['Player_Name'] ; ?>"><?php echo $row11['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="field">
-                  <select class="ui dropdown" name="player9" ng-model="player9">
+                  <select class="ui dropdown" name="player8" ng-model="player8">
+                    <option value="<?php echo $row['P8'] ; ?>"><?php echo $row['P8'] ; ?></option>
                     <?php 
-                      $sql12 = "SELECT * FROM players";
+                      $play8 = $row['P8'] ;
+                      $sql12 = "SELECT * FROM players where Player_Name != '$play8' ";
                       $query12 = mysql_query($sql12);
-                      while ($row12 = mysql_fetch_assoc($query12)) {
-                     ?>
+                      while($row12 = mysql_fetch_assoc($query12)){
+                    ?>
                     <option value="<?php echo $row12['Player_Name'] ; ?>"><?php echo $row12['Player_Name'] ; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="field">
+                  <select class="ui dropdown" name="player9" ng-model="player9">
+                    <option value="<?php echo $row['P9'] ; ?>"><?php echo $row['P9'] ; ?></option>
+                    <?php 
+                      $play9 = $row['P9'] ;
+                      $sql133 = "SELECT * FROM players where Player_Name != '$play9' ";
+                      $query133 = mysql_query($sql133);
+                      while($row133 = mysql_fetch_assoc($query133)){
+                    ?>
+                    <option value="<?php echo $row133['Player_Name'] ; ?>"><?php echo $row133['Player_Name'] ; ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -377,7 +417,29 @@ if(!empty($_SESSION['myuse'])){
                 </div>
               </div>
             </form>
+            <?php 
+            }
+            else
+            {
+              echo "
+              <div class='ui header'>لم تقم بإختيار اللاعبين بعد</div>
+              <a href='select_players.php' class='ui inverted huge blue submit button' style='transition: 1.5s;'>إختار اللاعبين</a>
+              ";
+            } 
+            ?>
       </div>
+      <?php 
+            }
+         else
+         {
+          echo "
+          <div class='ui container'>
+            <div class='ui red message'>
+              الإنتقالات متوقفة
+            </div>
+          </div>";
+         }
+       ?>
    </div>
       <!--footer Contents-->
       <?php require "footer.php"; ?>

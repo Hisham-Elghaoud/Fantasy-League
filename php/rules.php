@@ -117,7 +117,7 @@ color:#2C8A31;
               </div>
               <div class="content">
                 <p class="transition hidden" style="color:#154418;"> 
-                إجمالي ثمن التشكيلة يجب ألا يتجاوز 100 ألف
+                إجمالي ثمن التشكيلة يجب ألا يتجاوز 650 ألف
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
 require("config.php");
-if(!empty($_SESSION['admin'])){
+if(!empty($_SESSION['myuse'])){
 ?>
 
 <!doctype html>
@@ -9,7 +9,7 @@ if(!empty($_SESSION['admin'])){
     <meta charset="utf-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
-    <title>فانتازي دوري العياشي | الفرق</title>
+    <title>فانتازي دوري العياشي | المباريات</title>
     <link href="../css/default.css" rel="stylesheet" type="text/css" />
     <link href="../css/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="../img/logo.png">
@@ -18,47 +18,97 @@ if(!empty($_SESSION['admin'])){
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/semantic.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          $('select.dropdown').dropdown();
+          $('.special.cards .image').dimmer({
+            on: 'hover'
+          });
+      });
+    </script>
 </head>
-<body>
+<body ng-app="">
     <!--Fixed Nav Menu-->
-      <?php require "admin_fixed_nav.php"; ?>
+      <?php require "fixed_nav.php"; ?>
     <!--Sidebar Menu-->
-      <?php require "admin_sidebar.php"; ?>
+      <?php require "sidebar.php"; ?>
     <!--Page Contents-->
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment" style="background-image: url('../img/bg.png'); background-repeat: no-repeat; background-size: cover;">
         <!--Main Nav Menu-->
-        <?php require "admin_main_nav.php"; ?>
+        <?php require "main_nav.php"; ?>
       </div>
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-            <div class="sixteen wide column">      
-             <form class="ui form" dir="rtl" method="post" action="#">
-                <div class="field">
-                  <label>إضافة الفريق </label>
-                  <input type="text" name="teams_name" placeholder="الفريق">
-                </div>
-                <div class="field">
-                  <input name="submit" class="ui inverted blue button" type="submit" value="إضافة">
-               </div>
-              </form>
+            <div class="seven wide centered column">
               <?php 
-			
-			          if (isset($_POST["submit"])) 
-	                  {
-      							 $teams_name = mysql_real_escape_string($_POST["teams_name"]);
-      							 $sql= "INSERT INTO `teams` (`id`, `team_name`) VALUES (NULL, '$teams_name')";
-      							 mysql_query($sql);
-      							 print "<meta http-equiv='refresh' content='0;url=teams.php'>";  
-                     }
-			         ?> 
+                $sql4 = "SELECT * FROM matchs";
+                $result4 = mysql_query($sql4);
+                $numrows = mysql_num_rows($result4);
+                if ($numrows > 0) {
+                  while ($row4 = mysql_fetch_assoc($result4)){
+               ?>
+               <div class="ui container">
+                <div class="ui grid">
+                   <div class="ui middle aligned stackable grid container">
+                     <div class="row">
+                      <div class="ten wide centered column">
+                        <a href="match.php?team1=<?php echo $row4["team1"]; ?>&team2=<?php echo $row4["team2"]; ?>">
+                            <div class="ui huge horizontal divided list">
+                              <div class="item">
+                                <div class="content">
+                                  <div class="header"><?php echo $row4["team1"]; ?></div>
+                                </div>
+                              </div>
+                              <div class="item">
+                                <div class="content">
+                                  <?php 
+                                    if ($row4["score"] == " ") {
+                                   ?>
+                                  <div class="header">VS</div>
+                                  <?php 
+                                    }
+                                    else
+                                    {
+                                   ?>
+                                   <div class="header"><?php echo $row4["score"]; ?></div>
+                                   <?php } ?>
+                                </div>
+                              </div>
+                              <div class="item">
+                                <div class="content">
+                                  <div class="header"><?php echo $row4["team2"]; ?></div>
+                                </div>
+                              </div>
+                              <div class="item">
+                                <div class="content">
+                                  <div class="header"><?php echo " - التاريخ : ".$row4["match_date"]; ?></div>
+                                </div>
+                              </div>
+                          </div>
+                       </a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+               <?php 
+                  }
+                }
+                else
+                  echo "
+                <div class='ui red message'>
+                  لايوجد مباريات اليوم
+                </div>
+                ";
+               ?>
             </div>
           </div>
         </div>
       </div>
   <!--footer Contents-->
-      <?php require "admin_footer.php"; ?>
+      <?php require "footer.php"; ?>
     </div>
     <style type="text/css">
      .color{

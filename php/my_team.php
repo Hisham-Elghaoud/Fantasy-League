@@ -35,6 +35,13 @@ if(!empty($_SESSION['myuse'])){
       <div class="ui inverted vertical masthead center aligned segment" style="background-image: url('../img/bg.png'); background-repeat: no-repeat; background-size: cover;">
         <!--Main Nav Menu-->
         <?php require "main_nav.php"; ?>
+        <?php 
+              $sql5 = "SELECT * FROM user where User_Name = '$username' ";
+              $query5 = mysql_query($sql5);
+              $row5 = mysql_fetch_assoc($query5);
+              $my_teams = $row5["my_team"];
+              if ($my_teams == 1) {
+        ?>
         <div class="ui text container">
           <h1 class="ui inverted header">
           </h1>
@@ -323,6 +330,18 @@ if(!empty($_SESSION['myuse'])){
             } 
             ?>
       </div>
+      <?php 
+            }
+         else
+         {
+          echo "
+          <div class='ui container'>
+            <div class='ui red message'>
+              لا يمكنك تغيير التشكيلة حاليا
+            </div>
+          </div>";
+         }
+       ?>
    </div>
       <!--footer Contents-->
       <?php require "footer.php"; ?>

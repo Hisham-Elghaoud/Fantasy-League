@@ -41,7 +41,12 @@ if(!empty($_SESSION['myuse'])){
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-            <div class="sixteen wide column">
+            <div class="six wide centered column">
+              <a href="results.php" class="ui inverted fluid blue button" style="transition: 1.5s;">كافة النتائج</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="six wide centered column">
               <?php 
                 $dates = "20".date("y-m-d");
                 $sql4 = "SELECT * FROM matchs where match_date = '$dates' ";
@@ -64,7 +69,17 @@ if(!empty($_SESSION['myuse'])){
                               </div>
                               <div class="item">
                                 <div class="content">
+                                  <?php 
+                                    if ($row4["score"] == " ") {
+                                   ?>
                                   <div class="header">VS</div>
+                                  <?php 
+                                    }
+                                    else
+                                    {
+                                   ?>
+                                   <div class="header"><?php echo $row4["score"]; ?></div>
+                                   <?php } ?>
                                 </div>
                               </div>
                               <div class="item">

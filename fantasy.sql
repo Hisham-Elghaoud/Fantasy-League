@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 14, 2018 at 12:43 AM
+-- Generation Time: May 15, 2018 at 12:49 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `combination` (
   `P8` varchar(200) NOT NULL,
   `P9` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `combination`
@@ -58,15 +58,17 @@ CREATE TABLE IF NOT EXISTS `matchs` (
   `team1` varchar(100) NOT NULL,
   `team2` varchar(100) NOT NULL,
   `match_date` date NOT NULL,
+  `score` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `matchs`
 --
 
-INSERT INTO `matchs` (`id`, `team1`, `team2`, `match_date`) VALUES
-(1, 'al athad', 'al ahli', '2018-05-13');
+INSERT INTO `matchs` (`id`, `team1`, `team2`, `match_date`, `score`) VALUES
+(1, 'al athad', 'al ahli', '2018-05-15', '1 - 2'),
+(2, 'al shat', 'al madena', '2018-05-15', ' ');
 
 -- --------------------------------------------------------
 
@@ -92,22 +94,23 @@ CREATE TABLE IF NOT EXISTS `players` (
   `own_goal` int(11) NOT NULL,
   `full_match` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `players`
 --
 
 INSERT INTO `players` (`id`, `Player_Name`, `Game_Week_Points`, `Total_points`, `Team`, `Salary`, `update_date`, `goals`, `asesst`, `miss_pelanty`, `clean_sheet`, `gk_score`, `pelanty_save`, `goal_conceded`, `own_goal`, `full_match`) VALUES
-(1, 'Ayoub Lwela', 2, 10, 'al athad', 6, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(2, 'Muhimen Alssdiq', 4, 15, 'al athad', 6.4, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 'Bader Eltobal', 2, 8, 'al madena', 7.2, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 'Omar Almogrbe', 6, 15, 'al madena', 7.5, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 'Hisham Elghaoud', 4, 12, 'al shat', 7, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(6, 'Mooad Zbeda', 6, 12, 'al ahli', 7, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(7, 'Steve Jobes', 5, 5, 'al ahli', 5.4, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(8, 'Stevie Feliciano', 4, 4, 'al shat', 5.4, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(9, 'Jenny Hess', 1, 1, 'al madena', 4, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(1, 'Ayoub Lwela', 2, 10, 'al athad', 100, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 'Muhimen Alssdiq', 4, 15, 'al athad', 100, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'Bader Eltobal', 2, 8, 'al madena', 100, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 'Omar Almogrbe', 6, 15, 'al madena', 50, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 'Hisham Elghaoud', 4, 12, 'al shat', 50, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, 'Mooad Zbeda', 6, 12, 'al ahli', 100, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(7, 'Steve Jobes', 5, 5, 'al ahli', 50, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(8, 'Stevie Feliciano', 4, 4, 'al shat', 50, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(9, 'Jenny Hess', 1, 1, 'al madena', 50, '2018-05-13', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(10, 'mi', 0, 0, 'al ahli', 100, '2018-05-14', 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -131,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `ranks` (
 --
 
 INSERT INTO `ranks` (`id`, `User_Name`, `Game_Week_Ranks`, `Total_Ranks`, `Point_Game_Week`, `Total_Points`, `Register_Date`) VALUES
-(1, 'ayoub_user', 2, 2, 24, 304, '2018-05-13'),
-(2, 'Hisham', 1, 1, 25, 315, '2018-05-13');
+(1, 'ayoub_user', 2, 2, 24, 328, '2018-05-14'),
+(2, 'Hisham', 1, 1, 25, 340, '2018-05-14');
 
 -- --------------------------------------------------------
 
@@ -176,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Last_Name` varchar(100) NOT NULL,
   `Transfer` int(11) NOT NULL,
   `img_src` varchar(500) NOT NULL,
+  `my_team` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -183,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`, `img_src`) VALUES
-(1, 'ayoub_user', 'ayoub_fhlom@yahoo.com', '123456789', '0927173403', 'User', '2018-05-16', '10:30:00', 'dfds', 'moaad', 'adsaf', 0, '../img/pic.png'),
-(3, 'Hisham', 'hisham@gmail.com', '123456789', '0944687203', 'User', '2018-05-07', '23:04:09', 'al athad', 'Ù‡Ø´Ø§Ù…', 'Ø§Ù„Ù‚Ø¹ÙˆØ¯', 0, '../img/pic.png'),
-(8, 'Admin', '', '123456789', '', 'Admin', '0000-00-00', '00:00:00', '', '', '', 0, '');
+INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`, `img_src`, `my_team`) VALUES
+(1, 'ayoub_user', 'ayoub_fhlom@yahoo.com', '123456789', '0927173403', 'User', '2018-05-16', '10:30:00', 'dfds', 'moaad', 'adsaf', 0, '../img/pic.png', 1),
+(3, 'Hisham', 'hisham@gmail.com', '123456789', '0944687203', 'User', '2018-05-07', '23:04:09', 'al athad', 'Ù‡Ø´Ø§Ù…', 'Ø§Ù„Ù‚Ø¹ÙˆØ¯', 0, '../img/pic.png', 1),
+(8, 'Admin', '', '123456789', '', 'Admin', '0000-00-00', '00:00:00', '', '', '', 0, '', 1);

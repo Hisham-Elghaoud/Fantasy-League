@@ -54,6 +54,7 @@ require("config.php");
 	                    $email = mysql_real_escape_string($_POST["email"]);
 	                    $fav_team = mysql_real_escape_string($_POST["fav_team"]);
 	                    $transfer = 0;
+                      $my_team = 1;
                       $gwr = 0;
                       $tr = 0;
                       $pgw = 0;
@@ -62,9 +63,9 @@ require("config.php");
 	                    $Register_Date = date("y-m-d");
 	                    $Register_Time = date("H:i:s");
 	                    $img_src = "../img/pic.png";
-	                    $sql3 = "INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`, `img_src`) VALUES (NULL, '$username', '$email', '$password', '$phone', '$prevlage', '$Register_Date', '$Register_Time', '$fav_team', '$f_name', '$l_name', '$transfer' , '$img_src')";
+	                    $sql3 = "INSERT INTO `user` (`id`, `User_Name`, `Email`, `Password`, `Phone_Number`, `prevlage`, `Register_Date`, `Register_Time`, `Favorite_Team`, `First_Name`, `Last_Name`, `Transfer`, `img_src`, `my_team`) VALUES (NULL, '$username', '$email', '$password', '$phone', '$prevlage', '$Register_Date', '$Register_Time', '$fav_team', '$f_name', '$l_name', '$transfer' , '$img_src')";
 	                    mysql_query($sql3);
-                      $sql4 = "INSERT INTO `ranks` (`id`, `User_Name`, `Game_Week_Ranks`, `Total_Ranks`, `Point_Game_Week`, `Total_Points`, `Register_Date`) VALUES (NULL, '$username', '$gwr', '$tr', '$pgw' , '$tp', '$Register_Date')";
+                      $sql4 = "INSERT INTO `ranks` (`id`, `User_Name`, `Game_Week_Ranks`, `Total_Ranks`, `Point_Game_Week`, `Total_Points`, `Register_Date`) VALUES (NULL, '$username', '$gwr', '$tr', '$pgw' , '$tp', '$Register_Date', '$my_team')";
                       mysql_query($sql4);
 	                    echo
 	                    "

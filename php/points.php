@@ -284,15 +284,23 @@ if(!empty($_SESSION['myuse'])){
             </div>
           </div>
             <?php 
-            }
-            else
-            {
-              echo "
-              <div class='ui header'>لم تقم بإختيار اللاعبين بعد</div>
-              <a href='select_players.php' class='ui inverted huge blue submit button' style='transition: 1.5s;'>إختار اللاعبين</a>
-              ";
-            } 
+              }
+              else
+              {
             ?>
+          <div class="row">
+            <div class="three wide centered column">
+              <div class="row">
+                <div class='ui header'>لم تقم بإختيار اللاعبين بعد</div>
+              </div>
+              <div class="row">
+                <a href='select_players.php' class='ui inverted huge blue submit button' style='transition: 1.5s;'>إختار اللاعبين</a>
+              </div>
+            </div>
+          </div>
+          <?php
+            } 
+          ?>
         </div>
       </div>
       <!--footer Contents-->

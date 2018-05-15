@@ -33,7 +33,7 @@ if(!empty($_SESSION['admin'])){
       <div class="ui vertical stripe segment">
         <div class="ui middle aligned stackable grid container">
           <div class="row">
-            <div class="sixteen wide column">      
+            <div class="six wide centered column">      
              <form class="ui form" dir="rtl" method="post" action="#">
                 <div class="field">
                   <label>إضافة الفريق </label>

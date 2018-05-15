@@ -39,13 +39,13 @@ if(!empty($_SESSION['admin'])){
         <div class="ui middle aligned stackable grid container">
           <div class="row">
             <div class="sixteen wide column">
-                <form class="ui form" action="#" method="post">  
-                  <div class="two fields">
-                    <div class="field">
+               <form class="ui form" action="#" method="post">  
+                <div class="two fields">
+                  <div class="field">
                       <label>أسم اللعب</label>
                       <input name="Player_Name" placeholder="أسم اللعب" type="text">
-                    </div>
-                    <div class="field">
+                  </div>
+                  <div class="field">
                       <label> السعر </label>
                       <select class="ui dropdown" name="Salary">
                         <option value="100">100</option>
@@ -53,11 +53,11 @@ if(!empty($_SESSION['admin'])){
                         <option value="60">60</option>
                         <option value="40">40</option>  
                       </select>
-                    </div>
+                  </div>
                   </div>
                   <div class="field">
                     <label>الفريق</label>
-                    <select name="Team" class="ui dropdown " >
+                    <select name="Team" class="ui dropdown" >
 						        <?php 
                          $sql = "SELECT * FROM teams";
                          $query = mysql_query($sql);
@@ -67,12 +67,14 @@ if(!empty($_SESSION['admin'])){
                     <?php } ?>
                     </select>
                   </div>
-                  <br><br><br><br><br>
                   <div class="field">
-                    <input type="submit" name="submit" class="ui inverted blue fluid button " value="إضافة">
+                    <input type="submit" name="submit" class="ui inverted blue fluid button" value="إضافة">
                   </div>
-                </div>
-            </form>  
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>
              <?php
           	    if(isset($_POST["submit"]))
               		{
@@ -97,14 +99,7 @@ if(!empty($_SESSION['admin'])){
               			mysql_query($sql2);
               			 print "<meta http-equiv='refresh' content='0;url=players.php'>";	
               		}
-      	       ?> 
-            </div>
-          </div>
-        </div> 
-      </div>
-      
-  
-      
+      	       ?>
   <!--footer Contents-->
       <?php require "admin_footer.php"; ?>
     </div>
